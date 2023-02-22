@@ -35,8 +35,8 @@
                 </div>
                 <div class="time" id="time"></div>
                 <div class="date" id="date"></div>
-                <div class="nongli" id="nongli"></div>
-                <div class="nongli" id="tiangan"></div>
+                <div class="nongli" id="nongli">二月初三</div>
+                <div class="nongli" id="tiangan">癸卯年甲寅月辛亥日</div>
                 <div class="term" >
                     <div class="nterm" id="nterm">惊蛰  3月5日</div>
                     <div class="term_bk" id="term">雨水</div>
@@ -122,8 +122,8 @@
             document.getElementById("time").innerHTML = timeString
             document.getElementById("date").innerHTML = dateString + " " + weekString
             var nl = calendar.solar2lunar()
-            document.getElementById("nongli").innerHTML = nl.IMonthCn + nl.IDayCn
-            document.getElementById("tiangan").innerHTML = nl.gzYear + "年"+ nl.gzMonth+ "月" + nl.gzDay+"日"
+            // document.getElementById("nongli").innerHTML = nl.IMonthCn + nl.IDayCn
+            // document.getElementById("tiangan").innerHTML = nl.gzYear + "年"+ nl.gzMonth+ "月" + nl.gzDay+"日"
             document.getElementById('term').innerHTML =  nl.Term
         }
 
