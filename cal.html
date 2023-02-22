@@ -1,0 +1,17 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>　</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script  src="js/calendar.js"></script>
+  </head>
+  
+  <body>
+    <div id="cal"></div>
+  </body>
+  <script>
+    var nl = calendar.solar2lunar()
+    document.getElementById("cal").innerHTML = nl.IMonthCn + nl.IDayCn
+      
+  </script>
+</html>
