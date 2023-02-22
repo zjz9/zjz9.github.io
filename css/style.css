@@ -354,6 +354,7 @@ li div {
   width: 4rem;
   height: 10rem;
 }
+
 .term {
   font-size: 2rem;
   font-weight: 600;
@@ -365,6 +366,7 @@ li div {
   writing-mode: vertical-rl;
   text-orientation: upright;
 }
+
 .nterm {
     font-size: 1rem;
 }
@@ -380,8 +382,8 @@ li div {
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   font-size: 2rem;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
+  /* writing-mode: vertical-rl;
+  text-orientation: upright; */
 }
 
 .time {
