@@ -121,7 +121,7 @@
             document.getElementById('apm').innerHTML = apm
             document.getElementById("time").innerHTML = timeString
             document.getElementById("date").innerHTML = dateString + " " + weekString
-            var nl = calendar.solar2lunar()
+            var nl = JSON.parse(calendar.solar2lunar())
             document.getElementById("nongli").innerHTML = nl.IMonthCn +" " +  nl.IDayCn
             // document.getElementById("tiangan").innerHTML = nl.gzYear + "年"+ nl.gzMonth+ "月" + nl.gzDay+"日"
             document.getElementById('term').innerHTML =  nl.Term
