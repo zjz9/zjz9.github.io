@@ -9,7 +9,7 @@
  * @Time    2023-2-21 修改了节气显示部分的内容，增加了获取下一个节气的相关代码
  * @Version 1.0.3
  */
-const calendar = {
+var calendar = {
 
     /**
      * 农历1900-2100的润大小信息表
@@ -253,7 +253,7 @@ const calendar = {
      * @eg:var count = calendar.lYearDays(1987) ;//count=387
      */
     lYearDays: function (y) {
-        let i, sum = 348;
+        var i, sum = 348;
         for (i = 0x8000; i > 0x8; i >>= 1) {
             sum += (this.lunarInfo[y - 1900] & i) ? 1 : 0;
         }
@@ -308,7 +308,7 @@ const calendar = {
         if (m > 12 || m < 1) {
             return -1
         } //若参数错误 返回-1
-        const ms = m - 1;
+        var ms = m - 1;
         if (ms === 1) { //2月份的闰平规律测算后确认返回28或29
             return (((y % 4 === 0) && (y % 100 !== 0) || (y % 400 === 0)) ? 29 : 28);
         } else {
@@ -337,8 +337,8 @@ const calendar = {
      * @return Cn string
      */
     toAstro: function (cMonth, cDay) {
-        const s = "\u6469\u7faf\u6c34\u74f6\u53cc\u9c7c\u767d\u7f8a\u91d1\u725b\u53cc\u5b50\u5de8\u87f9\u72ee\u5b50\u5904\u5973\u5929\u79e4\u5929\u874e\u5c04\u624b\u6469\u7faf";
-        const arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
+        var s = "\u6469\u7faf\u6c34\u74f6\u53cc\u9c7c\u767d\u7f8a\u91d1\u725b\u53cc\u5b50\u5de8\u87f9\u72ee\u5b50\u5904\u5973\u5929\u79e4\u5929\u874e\u5c04\u624b\u6469\u7faf";
+        var arr = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
         return s.substr(cMonth * 2 - (cDay < arr[cMonth - 1] ? 2 : 0), 2) + "\u5ea7";//座
     },
 
@@ -362,10 +362,10 @@ const calendar = {
         if( y < 1900 || y > 2100 || n < 1 || n > 24) {
             return -1;
         }
-        const _table = this.sTermInfo[y - 1900];
-        const _calcDay = []
-        for (let index = 0; index < _table.length; index += 5) {
-            const chunk = parseInt('0x' + _table.substr(index, 5)).toString()
+        var _table = this.sTermInfo[y - 1900];
+        var _calcDay = []
+        for (var index = 0; index < _table.length; index += 5) {
+            var chunk = parseInt('0x' + _table.substr(index, 5)).toString()
             _calcDay.push(
               chunk[0],
               chunk.substr(1, 2),
@@ -386,7 +386,7 @@ const calendar = {
         if (m > 12 || m < 1) {
             return -1
         } //若参数错误 返回-1
-        let s = this.nStr3[m - 1];
+        var s = this.nStr3[m - 1];
         s += "\u6708";//加上月字
         return s;
     },
@@ -398,7 +398,7 @@ const calendar = {
      * @eg:var cnDay = calendar.toChinaDay(21) ;//cnMonth='廿一'
      */
     toChinaDay: function (d) { //日 => \u65e5
-        let s;
+        var s;
         switch (d) {
             case 10:
                 s = '\u521d\u5341';
@@ -436,9 +436,9 @@ const calendar = {
      * @eg:console.log(calendar.solar2lunar(1987,11,01));
      */
     solar2lunar: function (yPara, mPara, dPara) {
-        let y = parseInt(yPara);
-        let m = parseInt(mPara);
-        let d = parseInt(dPara);
+        var y = parseInt(yPara);
+        var m = parseInt(mPara);
+        var d = parseInt(dPara);
         //年份限定、上限
         if (y < 1900 || y > 2100) {
             return -1;// undefined转换为数字变为NaN
@@ -449,18 +449,18 @@ const calendar = {
         }
 
         //未传参  获得当天
-        let objDate;
+        var objDate;
         if (!y) {
             objDate = new Date();
         } else {
             objDate = new Date(y, parseInt(m) - 1, d);
         }
-        let i, leap = 0, temp = 0;
+        var i, leap = 0, temp = 0;
         //修正ymd参数
         y = objDate.getFullYear();
         m = objDate.getMonth() + 1;
         d = objDate.getDate();
-        let offset = (Date.UTC(objDate.getFullYear(), objDate.getMonth(), objDate.getDate()) - Date.UTC(1900, 0, 31)) / 86400000;
+        var offset = (Date.UTC(objDate.getFullYear(), objDate.getMonth(), objDate.getDate()) - Date.UTC(1900, 0, 31)) / 86400000;
         for (i = 1900; i < 2101 && offset > 0; i++) {
             temp = this.lYearDays(i);
             offset -= temp;
@@ -471,22 +471,22 @@ const calendar = {
         }
 
         //是否今天
-        let isTodayObj = new Date(),
+        var isTodayObj = new Date(),
             isToday = false;
         if (isTodayObj.getFullYear() === y && isTodayObj.getMonth() + 1 === m && isTodayObj.getDate() === d) {
             isToday = true;
         }
         //星期几
-        let nWeek = objDate.getDay(),
+        var nWeek = objDate.getDay(),
             cWeek = this.nStr1[nWeek];
         //数字表示周几顺应天朝周一开始的惯例
         if (nWeek === 0) {
             nWeek = 7;
         }
         //农历年
-        const year = i;
+        var year = i;
         leap = this.leapMonth(i); //闰哪个月
-        let isLeap = false;
+        var isLeap = false;
 
         //效验闰月
         for (i = 1; i < 13 && offset > 0; i++) {
@@ -518,29 +518,29 @@ const calendar = {
             --i;
         }
         //农历月
-        const month = i;
+        var month = i;
         //农历日
-        const day = offset + 1;
+        var day = offset + 1;
         //天干地支处理
-        const sm = m - 1;
-        const gzY = this.toGanZhiYear(year);
+        var sm = m - 1;
+        var gzY = this.toGanZhiYear(year);
 
         // 当月的两个节气
         // bugfix-2017-7-24 11:03:38 use lunar Year Param `y` Not `year`
-        const firstNode = this.getTerm(y, (m * 2 - 1));//返回当月「节」为几日开始
-        const secondNode = this.getTerm(y, (m * 2));//返回当月「节」为几日开始
+        var firstNode = this.getTerm(y, (m * 2 - 1));//返回当月「节」为几日开始
+        var secondNode = this.getTerm(y, (m * 2));//返回当月「节」为几日开始
 
         // 依据12节气修正干支月
-        let gzM = this.toGanZhi((y - 1900) * 12 + m + 11);
+        var gzM = this.toGanZhi((y - 1900) * 12 + m + 11);
         if (d >= firstNode) {
             gzM = this.toGanZhi((y - 1900) * 12 + m + 12);
         }
 
         //传入的日期的节气与否
-        let isTerm = false;
-        let Term = null;
-        let nextTerm = null;
-        let nextTermDate = null;
+        var isTerm = false;
+        var Term = null;
+        var nextTerm = null;
+        var nextTermDate = null;
         if (d ==  firstNode || d == secondNode) {
             isTerm = true
         }
@@ -569,19 +569,19 @@ const calendar = {
 
         }
         //日柱 当月一日与 1900/1/1 相差天数
-        const dayCyclical = Date.UTC(y, sm, 1, 0, 0, 0, 0) / 86400000 + 25567 + 10;
-        const gzD = this.toGanZhi(dayCyclical + d - 1);
+        var dayCyclical = Date.UTC(y, sm, 1, 0, 0, 0, 0) / 86400000 + 25567 + 10;
+        var gzD = this.toGanZhi(dayCyclical + d - 1);
         //该日期所属的星座
-        const astro = this.toAstro(m, d);
+        var astro = this.toAstro(m, d);
 
-        const solarDate = y + '-' + m + '-' + d;
-        const lunarDate = year + '-' + month + '-' + day;
+        var solarDate = y + '-' + m + '-' + d;
+        var lunarDate = year + '-' + month + '-' + day;
 
-        const festival = this.festival;
-        const lFestival = this.lFestival;
+        var festival = this.festival;
+        var lFestival = this.lFestival;
 
-        const festivalDate = m + '-' + d;
-        let lunarFestivalDate = month + '-' + day;
+        var festivalDate = m + '-' + d;
+        var lunarFestivalDate = month + '-' + day;
 
         // bugfix https://github.com/jjonline/calendar.js/issues/29
         // 农历节日修正：农历12月小月则29号除夕，大月则30号除夕
@@ -635,17 +635,17 @@ const calendar = {
         m = parseInt(m)
         d = parseInt(d)
         isLeapMonth = !!isLeapMonth;
-        const leapOffset = 0;
-        const leapMonth = this.leapMonth(y);
-        const leapDay = this.leapDays(y);
+        var leapOffset = 0;
+        var leapMonth = this.leapMonth(y);
+        var leapDay = this.leapDays(y);
         if (isLeapMonth && (leapMonth !== m)) {
             return -1;
         }//传参要求计算该闰月公历 但该年得出的闰月与传参的月份并不同
         if (y === 2100 && m === 12 && d > 1 || y === 1900 && m === 1 && d < 31) {
             return -1;
         }//超出了最大极限值
-        const day = this.monthDays(y, m);
-        let _day = day;
+        var day = this.monthDays(y, m);
+        var _day = day;
         //bugFix 2016-9-25
         //if month is leap, _day use leapDays method
         if (isLeapMonth) {
@@ -656,12 +656,12 @@ const calendar = {
         }//参数合法性效验
 
         //计算农历的时间差
-        let offset = 0;
-        let i;
+        var offset = 0;
+        var i;
         for (i = 1900; i < y; i++) {
             offset += this.lYearDays(i);
         }
-        let leap = 0, isAdd = false;
+        var leap = 0, isAdd = false;
         for (i = 1; i < m; i++) {
             leap = this.leapMonth(y);
             if (!isAdd) {//处理闰月
@@ -677,11 +677,11 @@ const calendar = {
             offset += day;
         }
         //1900年农历正月一日的公历时间为1900年1月30日0时0分0秒(该时间也是本农历的最开始起始点)
-        const strap = Date.UTC(1900, 1, 30, 0, 0, 0);
-        const calObj = new Date((offset + d - 31) * 86400000 + strap);
-        const cY = calObj.getUTCFullYear();
-        const cM = calObj.getUTCMonth() + 1;
-        const cD = calObj.getUTCDate();
+        var strap = Date.UTC(1900, 1, 30, 0, 0, 0);
+        var calObj = new Date((offset + d - 31) * 86400000 + strap);
+        var cY = calObj.getUTCFullYear();
+        var cM = calObj.getUTCMonth() + 1;
+        var cD = calObj.getUTCDate();
 
         return this.solar2lunar(cY, cM, cD);
     }
