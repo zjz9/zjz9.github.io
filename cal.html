@@ -175,11 +175,11 @@
                         var weaImg = '<span class="iconfont">' + img + '</span>' +
                                     '<div>'+ weather_data.city +'天气：' + weather_data.wea + '</div>' +
                                     '<div>最高/低气温：' + highTemp + '&#8451;-' + lowTemp + '&#8451;</div>' +
-                                    '<div>空气质量：' + air  + '</div>'
-                                    ;
+                                    '<div>空气质量：' + air  + '</div>';
                         var weaTemp = '<div class="tempNum">' + weather_data.tem + '<div class="symbol">&#8451;</div></div>'+
                                         '<div id="weaTitle">天气加载中...</div><div>湿度：' + weather_data.humidity + '</div>' +
-                                        '<div>风速：' + weather_data.win_meter + ' ' + weather_data.win_speed + '</div>' ;
+                                        '<div>风速：' + weather_data.win_meter + ' ' + weather_data.win_speed + '</div>'  +
+                                    '<div class="nterm">更新时间' + updateTime + '</div>';
                         document.getElementById('weaImg').innerHTML = weaImg
                         document.getElementById('weaTemp').innerHTML = weaTemp
                         document.getElementById('weaTitle').innerHTML = weather_data.city + '当前气温'
