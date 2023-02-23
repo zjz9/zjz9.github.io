@@ -230,14 +230,13 @@ li div {
 }
 
 #middle {
-  height: 45%;
+  height: 50%;
   width: 100%;
   text-align: center;
   /* font-family: 'DottedSongtiSquareRegular'; */
 }
 
 #bottom {
-  height: 30%;
   width: 100%;
   text-align: center;
 }
@@ -355,16 +354,12 @@ li div {
   height: 10rem;
 }
 
-.term {
+.tiangan {
   font-size: 2rem;
-  font-weight: 600;
-  position: absolute;
-  top: 0;
-  right: 5%;
-  width: 4rem;
-  height: 10rem;
-  writing-mode: vertical-rl;
-  text-orientation: upright;
+}
+
+.term {
+  font-size: 3rem;
 }
 
 .nterm {
@@ -394,7 +389,7 @@ li div {
 }
 
 .date {
-  font-size: 3rem;
+  font-size: 2rem;
   line-height: 3rem;
 }
 .nongli {
@@ -434,7 +429,8 @@ li div {
 #weaTemp {
   display: inline-block;
   float: right;
-  margin-right: 1rem;
+  margin-top:1rem;
+  margin-right: 2rem;
   font-size: 1.5rem;
   /* font-family: 'DottedSongtiSquareRegular'; */
 }
@@ -443,9 +439,8 @@ li div {
 
 .tempNum {
   display: inline-block;
-  font-size: 5rem;
+  font-size: 7rem;
   font-weight: 400;
-  line-height: 6.125rem;
 }
 
 

@@ -114,14 +114,14 @@ var calendar = {
     /**
      * 返回默认定义的阳历节日
      */
-    getFestival() {
+    getFestival: function() {
         return this.festival
     },
 
     /**
      * 返回默认定义的内容里节日
      */
-    getLunarFestival() {
+    getLunarFestival: function() {
         return this.lFestival
     },
 
@@ -129,7 +129,7 @@ var calendar = {
      *
      * @param param {Object} 按照festival的格式输入数据，设置阳历节日
      */
-    setFestival(param = {}) {
+    setFestival: function(param) {
         this.festival = param
     },
 
@@ -137,7 +137,7 @@ var calendar = {
      *
      * @param param {Object} 按照lFestival的格式输入数据，设置农历节日
      */
-    setLunarFestival(param = {}) {
+    setLunarFestival : function(param) {
         this.lFestival = param
     },
 
@@ -618,71 +618,5 @@ var calendar = {
             'nextTermDate':nextTermDate,
             'astro': astro
         };
-    },
-
-    /**
-     * 传入农历年月日以及传入的月份是否闰月获得详细的公历、农历object信息 <=>JSON
-     * !important! 参数区间1900.1.31~2100.12.1
-     * @param y  lunar year
-     * @param m  lunar month
-     * @param d  lunar day
-     * @param isLeapMonth  lunar month is leap or not.[如果是农历闰月第四个参数赋值true即可]
-     * @return JSON object
-     * @eg:console.log(calendar.lunar2solar(1987,9,10));
-     */
-    lunar2solar: function (y, m, d, isLeapMonth) {
-        y = parseInt(y)
-        m = parseInt(m)
-        d = parseInt(d)
-        isLeapMonth = !!isLeapMonth;
-        var leapOffset = 0;
-        var leapMonth = this.leapMonth(y);
-        var leapDay = this.leapDays(y);
-        if (isLeapMonth && (leapMonth !== m)) {
-            return -1;
-        }//传参要求计算该闰月公历 但该年得出的闰月与传参的月份并不同
-        if (y === 2100 && m === 12 && d > 1 || y === 1900 && m === 1 && d < 31) {
-            return -1;
-        }//超出了最大极限值
-        var day = this.monthDays(y, m);
-        var _day = day;
-        //bugFix 2016-9-25
-        //if month is leap, _day use leapDays method
-        if (isLeapMonth) {
-            _day = this.leapDays(y, m);
-        }
-        if (y < 1900 || y > 2100 || d > _day) {
-            return -1;
-        }//参数合法性效验
-
-        //计算农历的时间差
-        var offset = 0;
-        var i;
-        for (i = 1900; i < y; i++) {
-            offset += this.lYearDays(i);
-        }
-        var leap = 0, isAdd = false;
-        for (i = 1; i < m; i++) {
-            leap = this.leapMonth(y);
-            if (!isAdd) {//处理闰月
-                if (leap <= i && leap > 0) {
-                    offset += this.leapDays(y);
-                    isAdd = true;
-                }
-            }
-            offset += this.monthDays(y, i);
-        }
-        //转换闰月农历 需补充该年闰月的前一个月的时差
-        if (isLeapMonth) {
-            offset += day;
-        }
-        //1900年农历正月一日的公历时间为1900年1月30日0时0分0秒(该时间也是本农历的最开始起始点)
-        var strap = Date.UTC(1900, 1, 30, 0, 0, 0);
-        var calObj = new Date((offset + d - 31) * 86400000 + strap);
-        var cY = calObj.getUTCFullYear();
-        var cM = calObj.getUTCMonth() + 1;
-        var cD = calObj.getUTCDate();
-
-        return this.solar2lunar(cY, cM, cD);
     }
 };
