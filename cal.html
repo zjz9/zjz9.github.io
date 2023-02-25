@@ -6,6 +6,7 @@
     <meta charset="utf-8"/>
     <title>　</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.3.0/font/qweather-icons.css">
     <script src="js/cal.js"></script>
 </head>
 
@@ -46,11 +47,15 @@
         <div class="nonebtm_container"></div>
         <div class="weather_container" style="display: block;">
 
-            <div class="weaWrapper">
-                <div id="weaImg"></div>
-                <div id="weaTemp">
+            <div id="weather" class="weaWrapper">
+                <div id="weaImg" class="weaImg"></div>
+                <div id="weaTemp" class="weaTemp">
                     <div id="weaTitle">天气加载中...</div>
                 </div>
+            </div>
+            <div id="sunmoon" class="weaWrapper" style="display:none">
+                <div id="sunrise" class="weaImg"></div>
+                <div id="moonphase" class="weaTemp"><div class="tempNum">5<div class="symbol">℃</div></div><div id="weaTitle1">上海当前气温</div><div>湿度：46%</div><div>风速：1km/h 1级</div><div class="nterm">更新时间19:10</div></div>
             </div>
         </div>
     </div>
@@ -194,6 +199,46 @@
 
         weather();
         setInterval("weather()", 60 * 1000 * 20);
+
+        // 获取
+        // https://devapi.qweather.com/v7/weather/3d?location=101020100&key=0f71838b2cc2482e98fc26f31551d219
+        function sunmoon() {
+            console.log('weather update')
+            var xhr = createXHR();
+            xhr.open('GET','https://devapi.qweather.com/v7/weather/3d?location=101020100&key=0f71838b2cc2482e98fc26f31551d219',true);
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4) {
+                    var data = JSON.parse(this.responseText)
+                    if (data) {
+                        document.getElementById('sunrise').innerHTML = "<div class='qi-1028' style='font-size: 7.5rem;width: 7.5rem;font-weight: 100;font-style: normal;'></div><div>日出时间:"+data.daily[0]['sunrise'] +"</div>"+
+                                                                       "<div>日落时间:" + data.daily[0]['sunset'] +"</div>";
+                        document.getElementById('moonphase').innerHTML = "<div class='icon_big qi-" + data.daily[0]['moonPhaseIcon']+ "'></div>"+
+                        "<div>月相:" + data.daily[0]['moonPhase'] + "</div>" +
+                        "<div>月出时间:"+data.daily[0]['moonrise'] +"</div>"+
+                        "<div>月落时间:" + data.daily[0]['moonset'] + "</div>";
+                    }
+                }
+            }
+            xhr.send(null);
+        }
+
+        sunmoon();
+        setInterval("sunmoon()", 60 * 1000 * 20);
+
+        var w_or_s = 1;
+        function switch1() {
+            if (w_or_s == 1) {
+                document.getElementById('sunmoon').style.display ='none';
+                document.getElementById('weather').style.display ='block';
+                w_or_s = 0
+            } else {
+                document.getElementById('weather').style.display ='none';
+                document.getElementById('sunmoon').style.display ='block';
+                w_or_s = 1
+            }
+        }
+        switch1();
+        setInterval("switch1()", 10 * 1000);
 
 </script>
 </body>

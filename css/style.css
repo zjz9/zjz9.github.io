@@ -237,6 +237,7 @@ li div {
 }
 
 #bottom {
+  height: 10%;
   width: 100%;
   text-align: center;
 }
@@ -249,7 +250,7 @@ li div {
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
 }
-
+#weaImg
 .nonetop_container,
 .hitokoto_container,
 .weibo_container,
@@ -411,22 +412,22 @@ li div {
   font-size: 1.5rem;
 }
 
-#weaImg {
+.weaImg {
   display: inline-block;
   float: left;
   margin-left: 1.5rem;
   font-size: 5.8rem;
 }
 
-#weaImg > div{
+.weaImg > div{
   margin-top: 0.5rem;
   font-size: 1.5rem;
 }
-#weaImg > div {
+.weaImg > div {
   margin-top: 0rem;
 }
 
-#weaTemp {
+.weaTemp {
   display: inline-block;
   float: right;
   margin-top:1rem;
@@ -435,7 +436,12 @@ li div {
   /* font-family: 'DottedSongtiSquareRegular'; */
 }
 
-
+.icon_big {
+    font-size: 7.5rem;
+    width: 7.5rem;
+    font-weight: 100;
+    font-style: normal;
+}
 
 .tempNum {
   display: inline-block;
