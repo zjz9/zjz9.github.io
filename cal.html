@@ -212,7 +212,7 @@
                     if (data) {
                         document.getElementById('sunrise').innerHTML = "<div class='qi-1028' style='font-size: 6rem;width: 6rem;font-weight: 100;font-style: normal;'></div><div>日出时间:"+data.daily[0]['sunrise'] +"</div>"+
                                                                        "<div>日落时间:" + data.daily[0]['sunset'] +"</div>";
-                        document.getElementById('moonphase').innerHTML = "<div class='icon_big qi-" + data.daily[0]['moonPhaseIcon']+ "'></div>"+
+                        document.getElementById('moonphase').innerHTML = "<span class='icon_big qi-" + data.daily[0]['moonPhaseIcon']+ "'></span>"+
                         "<div>月相:" + data.daily[0]['moonPhase'] + "</div>" +
                         "<div>月出时间:"+data.daily[0]['moonrise'] +"</div>"+
                         "<div>月落时间:" + data.daily[0]['moonset'] + "</div>";
