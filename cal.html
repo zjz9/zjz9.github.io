@@ -44,20 +44,14 @@
     </div>
 
     <div id="bottom">
-        <div class="nonebtm_container"></div>
-        <div class="weather_container" style="display: block;">
-
             <div id="weather" class="weaWrapper">
                 <div id="weaImg" class="weaImg"></div>
+                <div id="sunmoon" class="" > </div>
                 <div id="weaTemp" class="weaTemp">
                     <div id="weaTitle">天气加载中...</div>
                 </div>
+
             </div>
-            <div id="sunmoon" class="weaWrapper" style="display:none">
-                <div id="sunrise" class="weaImg"></div>
-                <div id="moonphase" class="weaTemp"><div class="tempNum">5<div class="symbol">℃</div></div><div id="weaTitle1">上海当前气温</div><div>湿度：46%</div><div>风速：1km/h 1级</div><div class="nterm">更新时间19:10</div></div>
-            </div>
-        </div>
     </div>
 </div>
 
@@ -178,12 +172,12 @@
                         var air = weather_data.air
                         var updateTime = weather_data.update_time // 更新时间
                         var weaImg = '<span class="iconfont">' + img + '</span>' +
-                                    '<div>'+ weather_data.city +'天气：' + weather_data.wea + '</div>' +
-                                    '<div>最高/低气温：' + highTemp + '&#8451;-' + lowTemp + '&#8451;</div>' +
+                                    '<div>天气：' + weather_data.wea + '</div>' +
+                                    '<div>气温：' + highTemp + '&#8451;-' + lowTemp + '&#8451;</div>' +
                                     '<div>空气质量：' + air  + '</div>';
                         var weaTemp = '<div class="tempNum">' + weather_data.tem + '<div class="symbol">&#8451;</div></div>'+
                                         '<div id="weaTitle">天气加载中...</div><div>湿度：' + weather_data.humidity + '</div>' +
-                                        '<div>风速：' + weather_data.win_meter + ' ' + weather_data.win_speed + '</div>'  +
+                                        '<div>风速:' + weather_data.win_meter + ' ' + weather_data.win_speed + '</div>'  +
                                     '<div class="nterm">更新时间' + updateTime + '</div>';
                         document.getElementById('weaImg').innerHTML = weaImg
                         document.getElementById('weaTemp').innerHTML = weaTemp
@@ -210,12 +204,10 @@
                 if (this.readyState == 4) {
                     var data = JSON.parse(this.responseText)
                     if (data) {
-                        document.getElementById('sunrise').innerHTML = "<div class='qi-1028' style='font-size: 6rem;width: 6rem;font-weight: 100;font-style: normal;'></div><div>日出时间:"+data.daily[0]['sunrise'] +"</div>"+
-                                                                       "<div>日落时间:" + data.daily[0]['sunset'] +"</div>";
-                        document.getElementById('moonphase').innerHTML = "<span class='icon_big qi-" + data.daily[0]['moonPhaseIcon']+ "'></span>"+
+                        document.getElementById('sunmoon').innerHTML = "<div class='top15'><span class='icon_big qi-" + data.daily[0]['moonPhaseIcon']+ "'></span>"+
                         "<div>月相:" + data.daily[0]['moonPhase'] + "</div>" +
-                        "<div>月出时间:"+data.daily[0]['moonrise'] +"</div>"+
-                        "<div>月落时间:" + data.daily[0]['moonset'] + "</div>";
+                        "<div>日:"+data.daily[0]['sunrise']+"-"+ data.daily[0]['sunset'] +"</div>" +
+                        "<div>月:"+data.daily[0]['moonrise']+"-" + data.daily[0]['moonset'] +"</div>" ;
                     }
                 }
             }
@@ -237,8 +229,8 @@
                 w_or_s = 1
             }
         }
-        switch1();
-        setInterval("switch1()", 10 * 1000);
+        //switch1();
+        //setInterval("switch1()", 10 * 1000);
 
 </script>
 </body>

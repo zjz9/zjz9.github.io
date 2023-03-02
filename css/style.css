@@ -48,7 +48,7 @@
 
 .iconfont {
   font-family: "iconfont" !important;
-  font-size: 7.5rem;
+  font-size: 6rem;
   width: 7.5rem;
   font-weight: 100;
   font-style: normal;
@@ -421,32 +421,25 @@ li div {
 }
 
 .weaImg > div{
-  margin-top: 0.5rem;
   font-size: 1.5rem;
-}
-.weaImg > div {
-  margin-top: 0rem;
 }
 
 .weaTemp {
   display: inline-block;
-  float: right;
   margin-top:1rem;
-  margin-right: 2rem;
   font-size: 1.5rem;
-  /* font-family: 'DottedSongtiSquareRegular'; */
 }
 
 .icon_big {
-    font-size: 6rem;
-    width: 6rem;
+    font-size: 5rem;
+    width: 5rem;
     font-weight: 100;
     font-style: normal;
 }
 
 .tempNum {
   display: inline-block;
-  font-size: 7rem;
+  font-size: 6rem;
   font-weight: 400;
 }
 
@@ -496,4 +489,25 @@ li div {
   background-image: none !important;
   /* -webkit-transition: color, background-color 1s;
     transition: color, background-color 1s; */
+}
+
+#weaImg,
+#weaTemp,
+#sunmoon
+{
+display:inline-block;
+}
+
+#weaImg{
+    float:left;
+}
+
+#sunmoon{
+    float:right;
+    margin-right: 2rem;
+    font-size: 1.5rem;
+}
+
+.top15{
+    margin-top:1.5rem;
 }
